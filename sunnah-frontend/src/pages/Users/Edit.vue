@@ -44,9 +44,13 @@ onMounted(() => fetchProduct())
 <template>
   <div>
     <form @submit.prevent="handleUpdate" class="max-w-full px-4 sm:px-6 lg:px-12">
-      <p class="text-2xl tracking-wide text-gray-900">Create product</p>
       <div class="mt-4 flex flex-col space-y-4">
         <p v-if="errorMessage" class="text-red-600 mt-2">{{ errorMessage }}</p>
+        <div class="mx-auto">
+            <label for="Image" class="block font-medium text-sm text-gray-700">Image</label>
+            <img :src="product.Image" width="150" height="150">
+             <input type="file" @change="handleFileUpload">
+          </div>
         <div>
           <label for="email" class="block font-medium text-sm text-gray-700">Name</label>
           <input type="text" name="email" id="email" v-model="product.Name" placeholder="Product Name" autofocus="on" class="px-3 py-2 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" />
@@ -82,11 +86,6 @@ onMounted(() => fetchProduct())
           <input type="text" name="Type" id="Type" v-model="product.Type" placeholder="Type" class="px-3 py-2 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" />
         </div>
 
-        <div>
-          <label for="Image" class="block font-medium text-sm text-gray-700">Image</label>
-          <img :src="product.Image" width="150" height="150">
-           <input type="file" @change="handleFileUpload">
-        </div>
 
         <div class="flex items-center justify-end">
           <RouterLink

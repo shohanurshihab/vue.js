@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-
+// import transporter from './sendMail.js';
 const router = useRouter()
 
 const formData = ref({
@@ -30,8 +30,25 @@ const submitLogin = () => {
           console.log(userType.Type);
           // router.push('/');
           if (userType.Type === 'Admin') {
-            router.push('/admindash')
+            router.push('/')
           } else if (userType.Type === 'Customer') {
+            // const userEmail = "skshihab531@gmail.com"; // Replace with the user's email address 
+            //    // Define the email details
+            // const mailOptions = {
+            //   from: 'devile741@gmail.com', // Replace with your own email address
+            //   to: userEmail,
+            //   subject: 'Welcome to My App',
+            //   text: 'Thank you for logging in. We appreciate your support!'
+            // };
+
+            // // Send the email
+            // transporter.sendMail(mailOptions, (error, info) => {
+            //   if (error) {
+            //     console.error(error);
+            //   } else {
+            //     console.log('Email sent: ' + info.response);
+            //   }
+            // });  
             router.push('/')
           }
             else if (userType.Type === 'Manager') {
@@ -55,11 +72,13 @@ const submitLogin = () => {
 }
 </script>
 
+
+
 <template>
   <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
     <form @submit.prevent="submitLogin" class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
       <img src="../assets/logo.png" alt="Logo" class="mx-auto h-32 w-32" />
-
+      
       <p class="text-gray-900">Welcome to Sunnah Store!</p>
       <p class="mt-2 text-xs text-gray-900">Please sign in to continue</p>
 

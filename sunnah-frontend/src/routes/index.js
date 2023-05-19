@@ -53,6 +53,10 @@ import InventoryEdit from '@/pages/Inventory/Edit.vue'
 import CategoryProductIndex from '@/pages/CategoryProduct/Index.vue'
 import CategoryProductCreate from '@/pages/CategoryProduct/Create.vue'
 import CategoryProductEdit from '@/pages/CategoryProduct/Edit.vue'
+// CategoryProduct
+import CatalogIndex from '@/pages/Catalog/Index.vue'
+import CatalogCreate from '@/pages/Catalog/Create.vue'
+import CatalogEdit from '@/pages/Catalog/Edit.vue'
 
 
 import Employee from '@/pages/Employee.vue'
@@ -72,16 +76,23 @@ const routes = [
   },
   {
     path: '/orders', component: OredersIndex, meta: { title: "Orders", auth: true },
- children: [
+    children: [
       { path: 'create', component: OrdersCreate, meta: {title: "Create Order", auth: true} },
       { path: ':id/edit', component: OrdersEdit, meta: {title: "Edit Order", auth: true} },
     ]
   },
   {
     path: '/users', component: UsersIndex, meta: { title: "Users", auth: true },
- children: [
+  children: [
       { path: 'create', component: UsersCreate, meta: {title: "Create User", auth: true} },
       { path: ':id/edit', component: UsersEdit, meta: {title: "Edit User", auth: true} },
+    ]
+  },
+  {
+    path: '/catalogs', component: CatalogIndex, meta: { title: "Catalog", auth: true },
+  children: [
+      { path: 'create', component: CatalogCreate, meta: {title: "Create Catalog", auth: true} },
+      { path: ':id/edit', component: CatalogEdit, meta: {title: "Edit Catalog", auth: true} },
     ]
   },
   { path: '/marketing', component: Employee, meta: {title: "Marketing", auth: true} },

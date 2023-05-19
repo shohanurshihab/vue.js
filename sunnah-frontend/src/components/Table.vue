@@ -38,7 +38,7 @@ const statusStyles = {
 <template>
     <div class="max-w-full px-4 sm:px-6 lg:px-12">
         <div class="flex flex-col mt-2">
-            <div class="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg border border-gray-200">
+            <div class="align-middle min-w-full h-[600px] overflow-x-auto shadow overflow-auto sm:rounded-lg border border-gray-200">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>

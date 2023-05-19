@@ -2,54 +2,57 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import Chart from 'chart.js/auto'
+
 export default {
   setup() {
-    const users = ref(0)
-    const orders = ref(0)
-    const product = ref(0)
-    
+    let users = ref(0)
+    let orders = ref(0)
+    let product = ref(0)
+
     const fetchUsers = () => {
-      axios.get(`/api/users`)
-        .then(response => users.value = response.data.length)
+      return axios
+        .get(`/api/users`)
+        .then(response => {
+          users.value = response.data.length
+        })
         .catch(error => console.log(error.response))
     }
 
     const fetchOrders = () => {
-      axios.get(`/api/orders`)
-        .then(response => orders.value = response.data.length)
+      return axios
+        .get(`/api/orders`)
+        .then(response => {
+          orders.value = response.data.length
+        })
         .catch(error => console.log(error.response))
     }
 
     const fetchProduct = () => {
-      axios.get(`/api/products`)
-        .then(response => product.value = response.data.length)
+      return axios
+        .get(`/api/products`)
+        .then(response => {
+          product.value = response.data.length
+        })
         .catch(error => console.log(error.response))
     }
-    
-  
-  onMounted(() => {
+
+    onMounted(() => {
       Promise.all([fetchUsers(), fetchOrders(), fetchProduct()])
         .then(() => {
-          const ctx = document.getElementById('orders-chart').getContext('2d');
+          const ctx = document.getElementById('orders-chart').getContext('2d')
           new Chart(ctx, {
             type: 'bar',
             data: {
               labels: ['Users', 'Orders', 'Products'],
-              datasets: [{
-                label: 'Count',
-                data: [10, 2, 12],
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)'
-                ],
-                borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'
-                ],
-                borderWidth: 3
-              }]
+              datasets: [
+                {
+                  label: 'Count',
+                  data: [users.value, orders.value, product.value],
+                  backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                  borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                  borderWidth: 5
+                }
+              ]
             },
             options: {
               scales: {
@@ -58,12 +61,11 @@ export default {
                 }
               }
             }
-          });
+          })
         })
         .catch(error => console.log(error))
     })
-    
- 
+
     return {
       users,
       orders,
@@ -71,36 +73,32 @@ export default {
     }
   }
 }
-
-
 </script>
-
 <template>
   <div class="dashboard">
     <div class="bars">
-      <div class="bar">
+      <RouterLink to="/users" class="bar bar-users">
         <h2>Users</h2>
         <div class="bar-value">{{ users }}</div>
-      </div>
-      <div class="bar">
+      </RouterLink>
+      <RouterLink to="/orders" class="bar bar-orders">
         <h2>Orders</h2>
         <div class="bar-value">{{ orders }}</div>
-      </div>
-      <div class="bar">
+      </RouterLink>
+      <RouterLink to="/products" class="bar bar-products">
         <h2>Products</h2>
         <div class="bar-value">{{ product }}</div>
-      </div>
+      </RouterLink>
     </div>
-    <div class="chart" id="chart">
+    <div class="chart-container">
       <canvas id="orders-chart"></canvas>
     </div>
   </div>
 </template>
 
-
 <style>
 .dashboard {
-  padding: 1rem;
+  padding: 1.14rem;
 }
 
 .bars {
@@ -111,47 +109,67 @@ export default {
 
 .bar {
   flex-basis: calc(33.33% - 1rem);
-  background-color: #eee;
-  border-radius: 5px;
-  padding: 1rem;
+  background-color: rgba(255, 99, 132, 0.2);
+  border-radius: 25px;
+  padding: 0.8rem;
   box-sizing: border-box;
-  text-align: center;
+  height: 120px;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bar-users {
+  background-color: rgba(255, 99, 132, 1);
+}
+
+.bar-orders {
+  background-color: rgba(54, 162, 235, 1);
+}
+
+.bar-products {
+  background-color: rgba(255, 206, 86, 1);
 }
 
 .bar h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  text-align: center;
+  font-size: 30px;
+  text-align: left;
+  margin-top: -5px;
 }
 
 .bar-value {
-  font-size: 2rem;
+  font-size: 80px;
   font-weight: bold;
-  text-align: center;
+  text-align: right;
+  margin: 0;
+  translate: 0px -60px;
 }
 
-.chart {
-  width: 100%;
-  max-width: 800px;
-  height: 400px;
+.chart-container {
+  flex: 1;
   margin: 1rem 0;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  height: 500px;
 }
 
-@media (max-width: 600px) {
-  .bars {
-    flex-wrap: wrap;
-  }
+.chart-container canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
 
-  .bar {
-    flex-basis: calc(100% - 2rem);
-    margin-bottom: 1rem;
-  }
-
-  .chart {
-    height: 300px;
-  }
+/* New style for RouterLink */
+.RouterLink-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
 }
 </style>
+
