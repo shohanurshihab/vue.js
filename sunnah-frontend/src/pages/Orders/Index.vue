@@ -3,7 +3,7 @@ import { ref, onMounted, onUpdated } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 
-import Table from '@/components/Table.vue'
+import Table from '@/components/TableOrder.vue'
 
 const route = useRoute()
 

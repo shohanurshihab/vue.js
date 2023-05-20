@@ -21,7 +21,7 @@ const handleSubmit = () => {
 <template>
   <div>
     <form @submit.prevent="handleSubmit" class="max-w-full px-4 sm:px-6 lg:px-12">
-        <p class="text-2xl tracking-wide text-gray-900">Create product</p>
+
         <div class="mt-4 flex flex-col space-y-4">
         <p v-if="errorMessage" class="text-red-600 mt-2">{{ errorMessage }}</p>
         <div>

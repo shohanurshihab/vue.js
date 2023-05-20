@@ -50,13 +50,11 @@ const typeSet = {
             <img :src="item.Image" class="w-40 h-40 object-contain">
           </div>
           <div class="mt-4">
-            <div class="text-lg text-gray-900">User ID : {{ item.Id }}</div>
-            <div class="text-xl font-bold text-gray-500">Username : {{ item.Name }}</div>
-            <div class="mt-2 text-gray-900">Email : {{ item.Email }}</div>
-            <div class="mt-2 text-gray-900">Address : {{ item.Address }}</div>
-            <div class="mt-2 text-gray-900">Phone : {{ item.Phone }}</div>
-            <div class="mt-2 text-gray-900">Psk : {{ item.Password }}</div>
-            <div class="mt-2 text-gray-900">User Type : {{ typeSet[item.Type] }}</div>
+            <div class="text-lg text-gray-900">Product ID : {{ item.Id }}</div>
+            <div class="text-xl font-bold text-gray-500">Product Name : {{ item.Name }}</div>
+            <div class="mt-2 text-gray-900">Price : {{ item.Price }} ৳</div>
+            <div class="mt-2 text-gray-900">In Stock :{{ item.Quantity }}</div>
+            <div class="mt-2 text-gray-900"> Category : {{ item.CategoryId }}</div>
              <div class="mt-2 flex justify-end">
               <slot :item="item"></slot>
             </div>

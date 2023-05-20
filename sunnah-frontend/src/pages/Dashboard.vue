@@ -98,22 +98,25 @@ export default {
 
 <style>
 .dashboard {
+  translate: 0px -20px;
   padding: 1.14rem;
+  
 }
 
 .bars {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-evenly;
   margin-bottom: 2rem;
 }
 
 .bar {
   flex-basis: calc(33.33% - 1rem);
   background-color: rgba(255, 99, 132, 0.2);
+  max-width: 28%;
   border-radius: 25px;
   padding: 0.8rem;
   box-sizing: border-box;
-  height: 120px;
+  height: 130px;
   color: white;
   text-decoration: none;
   display: flex;
@@ -144,7 +147,7 @@ export default {
   font-weight: bold;
   text-align: right;
   margin: 0;
-  translate: 0px -60px;
+  translate: 0px -55px;
 }
 
 .chart-container {

@@ -161,11 +161,15 @@ label {
 .column input{
   width: 100%;
   padding: 0.5rem;
+  border: #007bff2d;
+  border-style:solid;
 }
 
 .column textarea {
   width: 100%;
   padding: 0.4rem;
+  border: #007bff2d;
+  border-style:solid;
 }
 
 .btn {

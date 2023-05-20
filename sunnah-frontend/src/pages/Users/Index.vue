@@ -51,15 +51,22 @@ onUpdated(() => fetchProducts())
         Add User
       </RouterLink>
     </div>
-    <Table :fields="tableFields" :data="products">
-      <template v-slot:actions="slotProps">
-        <div class="px-6 py-4 flex items-center justify-end">
-          <RouterLink :to="`/users/${slotProps.data.Id}/edit`" class="text-xs bg-cyan-500 text-white px-2 py-0.5 rounded-md font-semibold uppercase">Edit</RouterLink>
-
-          <button @click="handleDelete(slotProps.data)" class="ml-1 text-xs bg-red-500 text-white px-2 py-0.5 rounded-md font-semibold uppercase">Delete</button>
-        </div>
-      </template>
-    </Table>
+   <Table :data="products">
+        <template v-slot:default="{ item }">
+          <RouterLink
+            :to="`/users/${item.Id}/edit`"
+            class="text-xs bg-cyan-500 text-white px-2 py-0.5 rounded-md font-semibold uppercase mr-2"
+          >
+            Edit
+          </RouterLink>
+          <button
+            @click="() => handleDelete(item)"
+            class="text-xs bg-red-500 text-white px-2 py-0.5 rounded-md font-semibold uppercase"
+          >
+            Delete
+          </button>
+        </template>
+      </Table>
     </template>
     <RouterView v-else />
   </div>
